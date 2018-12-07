@@ -147,9 +147,14 @@ class CachedImage extends React.Component {
                 this.safeSetState({
                     cachedImagePath
                 });
+
+                this.props.getCachedImagePath(cachedImagePath)
+
             })
             .catch(err => {
                 // console.warn(err);
+                this.props.getCachedImagePath(null)
+
                 this.safeSetState({
                     cachedImagePath: null,
                     isCacheable: false
