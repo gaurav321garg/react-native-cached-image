@@ -52,8 +52,8 @@ class CachedImage extends React.Component {
     };
 
     static defaultProps = {
-            renderImage: props => (<ImageBackground imageStyle={props.style} ref={CACHED_IMAGE_REF} {...props} />),
-            activityIndicatorProps: {},
+        renderImage: props => (<ImageBackground imageStyle={props.style} ref={CACHED_IMAGE_REF} {...props} />),
+        activityIndicatorProps: {},
     };
 
     static contextTypes = {
@@ -147,13 +147,16 @@ class CachedImage extends React.Component {
                 this.safeSetState({
                     cachedImagePath
                 });
-
-                this.props.getCachedImagePath(cachedImagePath)
-
+                if (this.props.getCachedImagePath) {
+                    this.props.getCachedImagePath(cachedImagePath)
+                }
             })
             .catch(err => {
                 // console.warn(err);
-                this.props.getCachedImagePath(null)
+
+                if (this.props.getCachedImagePath) {
+                    this.props.getCachedImagePath(null)
+                }
 
                 this.safeSetState({
                     cachedImagePath: null,
@@ -223,11 +226,11 @@ class CachedImage extends React.Component {
             children: (
                 LoadingIndicator
                     ? <View style={[imageStyle, activityIndicatorStyle]}>
-                    <LoadingIndicator {...activityIndicatorProps} />
-                </View>
+                        <LoadingIndicator {...activityIndicatorProps} />
+                    </View>
                     : <ActivityIndicator
-                    {...activityIndicatorProps}
-                    style={activityIndicatorStyle}/>
+                        {...activityIndicatorProps}
+                        style={activityIndicatorStyle}/>
             )
         });
     }
