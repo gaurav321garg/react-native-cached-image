@@ -18,6 +18,7 @@ const {
     ActivityIndicator,
     Platform,
     StyleSheet,
+    Image,
 } = ReactNative;
 
 const styles = StyleSheet.create({
@@ -236,4 +237,4 @@ class CachedImage extends React.Component {
 
 }
 
-module.exports = CachedImage;
+module.exports = Image;
